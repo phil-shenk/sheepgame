@@ -7,6 +7,9 @@ import com.japa.sheep.SheepGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.title = "SheepGame";
+		config.width = 800;
+		config.height = 400;
 		new LwjglApplication(new SheepGame(), config);
 	}
 }
