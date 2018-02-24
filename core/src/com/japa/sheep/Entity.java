@@ -6,6 +6,8 @@ public abstract class Entity {
     Position pos;
     Texture skin;
 
+    public abstract void tick();
+
     public abstract Position getPosition();
 
     public abstract void setPosition();
