@@ -8,9 +8,15 @@ public abstract class Entity extends Actor{
     public float speed;
     public abstract void tick();
 
-    public abstract Position getPosition();
+    public Position getPosition()
+    {
+        return pos;
+    }
 
-    public abstract void setPosition();
+    public void setPosition(float newx, float newy)
+    {
+        pos.setPosition(newx, newy);
+    }
 
     public abstract Texture getSkin();
 

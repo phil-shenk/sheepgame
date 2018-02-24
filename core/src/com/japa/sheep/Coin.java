@@ -9,16 +9,6 @@ public class Coin extends Thing {
     }
 
     @Override
-    public Position getPosition() {
-        return this.getPosition();
-    }
-
-    @Override
-    public void setPosition() {
-
-    }
-
-    @Override
     public Texture getSkin() {
         return null;
     }
