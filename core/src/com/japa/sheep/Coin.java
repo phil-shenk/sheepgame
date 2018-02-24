@@ -2,7 +2,7 @@ package com.japa.sheep;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public class Coin extends Object {
+public class Coin extends Thing {
     @Override
     public void tick() {
 
