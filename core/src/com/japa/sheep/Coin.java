@@ -10,7 +10,7 @@ public class Coin extends Object {
 
     @Override
     public Position getPosition() {
-        return null;
+        return this.getPosition();
     }
 
     @Override

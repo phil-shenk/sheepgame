@@ -7,7 +7,7 @@ public class Position {
     //Full Constructor method
     public Position(float x, float y)
     {
-        setPos(x, y);
+        setPosition(x, y);
     }
 
     //Copy Constructor method
@@ -29,6 +29,12 @@ public class Position {
         return y;
     }
 
+    //Get y method
+    public Position getPosition()
+    {
+        return this;
+    }
+
     //Set x method
     public void setx(float newx)
     {
@@ -42,7 +48,7 @@ public class Position {
     }
 
     //Set both coordinates
-    public void setPos(float newx, float newy)
+    public void setPosition(float newx, float newy)
     {
         this.x = newx;
         this.y = newy;
