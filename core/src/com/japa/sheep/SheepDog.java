@@ -8,6 +8,13 @@ public class SheepDog extends Animal {
 
     }
 
+    /**
+     * sheepdog chase wolves
+     */
+    public void chase(){
+
+    }
+
     @Override
     public Position getPosition() {
         return null;

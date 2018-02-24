@@ -10,6 +10,12 @@ public class Sheep extends Animal{
     public void flee(){
 
     }
+    public void wander(){
+
+    }
+    public void die(){
+
+    }
     @Override
     public Position getPosition() {
         return null;

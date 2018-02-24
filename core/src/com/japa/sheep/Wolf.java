@@ -7,10 +7,20 @@ public class Wolf extends Animal {
     public void tick() {
 
     }
+
+    /**
+     * after a certain amount of time, wolf will chase/eat a sheep
+     */
     public void chase(){
 
     }
 
+    /**
+     * from sheepdog
+     */
+    public void flee(){
+
+    }
     @Override
     public Position getPosition() {
         return null;
