@@ -14,7 +14,7 @@ public class Position {
     public Position(Position other)
     {
         this.x = other.x;
-        this.y = other.y;
+        this.y = other.y; //tset
     }
 
     //Get x method
