@@ -26,14 +26,14 @@ public class Sheep extends Animal{
 
     public void act(float delta) {
         System.out.println("Bahahaha!");
-        sheepCounter+=3*delta;
+        sheepCounter+=6*delta*Math.random();
         wander();
     }
     public void flee(){
 
     }
     public void wander(){
-        setPosition(((float)(pos.getx()+Math.cos(sheepCounter))), ((float)(pos.gety()+1.5*Math.sin(2*sheepCounter))));
+        setPosition(((float)(pos.getx()+2.5*(Math.sin(2.1*sheepCounter)+.25*Math.sin(6*sheepCounter))*Math.cos(sheepCounter))), ((float)(pos.gety()+3*(Math.sin(2.1*sheepCounter)+.25*Math.sin(6*sheepCounter))*Math.sin(sheepCounter))));
     }
     public void die(){
 
