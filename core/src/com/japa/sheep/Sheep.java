@@ -7,7 +7,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import static com.japa.sheep.GameScreen.viewportHeight;
+import static com.japa.sheep.GameScreen.viewportWidth;
 
 public class Sheep extends Animal{
 
@@ -15,6 +18,7 @@ public class Sheep extends Animal{
     private boolean fleeing = false;
     float sheepCounter;
     private boolean returning = false;
+    private boolean wandering = true;
     public Sheep(Vector3 pos, World world){
         super(pos, world);
     }
@@ -34,17 +38,18 @@ public class Sheep extends Animal{
         //body.setTransform(pos.x, pos.y,0);
         sheepCounter += delta;
         inHerd();
-
-        if(returning){
-            returnToHerd(delta);
-        }else{
-        if (!fleeing) {
+        if (wandering) {
             wander(delta);
             //returnToHerd(delta);
-        } else{
+        } else if (fleeing) {
             flee(delta);
-        }}
-
+        }
+        else if(returning){
+            returnToHerd(delta);
+        }
+        else{
+            wander(delta);
+        }
 
     }
     public void returnToHerd(float delta){
@@ -81,12 +86,6 @@ public class Sheep extends Animal{
     public void die(){
 
     }
-
-    public void collidedWith(Entity e){
-        if(e.getClass()==SheepDog.class){
-            returning = true;
-        }
-    }
     @Override
     public Vector3 getPosition() {
         return null;
@@ -114,23 +113,23 @@ public class Sheep extends Animal{
         //batch.draw(region, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
         batch.draw(texture, pos.x, pos.y);
     }
-    public boolean inHerd(){
+    public void inHerd(){
         if(!returning){
-            if( pos.x < 75  || pos.x > (GameScreen.viewportWidth-75)){
+            if( (int)(viewportWidth*.2)  > pos.x  || pos.x > (int)(viewportWidth*.8)){
                 fleeing = true;
             }
-            else if ( pos.y < 200 || pos.y>512){
+            else if ( pos.y < (int)(viewportHeight*.4) || pos.y> (int)(viewportHeight*.99)){
                 fleeing = true;
             }
             else{
                 double x = Math.random();
-                if( x < 0.01009){
+                if( x < 0.00009){
                     fleeing = true;
                 }
-                return fleeing;
             }
         }
-
-        return fleeing;
+        if(fleeing){
+            wandering = false;
+        }
     }
 }

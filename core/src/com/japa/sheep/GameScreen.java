@@ -88,7 +88,7 @@ public class GameScreen implements Screen, InputProcessor {
         stage.addActor(doggo);
         //creates a sheeps
         for (int sheepcount=0; sheepcount<26; sheepcount++){
-            Sheep bob = new Sheep(new Vector3((float)((viewportWidth-100)*Math.random()+60),(float)(200*Math.random()+250),0), world);
+            Sheep bob = new Sheep(new Vector3((float)((viewportWidth-(.2*viewportWidth))*Math.random()+(.08*viewportWidth)),(float)((.4*viewportHeight)*Math.random()+(.5*viewportHeight)),0), world);
             entities.add(bob);
             stage.addActor(bob);
             //throw him in the herd as well
