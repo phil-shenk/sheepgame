@@ -10,12 +10,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
 public class Coin extends Thing {
 
-    public Coin(Vector3 pos, World world){
+    public Coin(Vector3 pos, World world) {
         super(pos, world);
-    static Texture texture = new Texture("coin.jpg");
-    public Coin(Vector3 pos){
-        this.pos = pos;
     }
+    static Texture texture = new Texture("coin.jpg");
+
     @Override
     public void tick() {
 
@@ -33,7 +32,6 @@ public class Coin extends Thing {
     }
     @Override
     public void collidedWith(Entity e){
-        System.out.println("COLLIDED WITH "+e.toString());
     }
     @Override
     public Texture getSkin() {

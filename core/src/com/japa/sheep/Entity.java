@@ -57,7 +57,7 @@ public abstract class Entity extends Actor{
     }
 
     public void collidedWith(Entity e){
-        System.out.println(this+" collided with "+e);
+
     }
 
     public void setPosition(float newx, float newy)

@@ -77,8 +77,8 @@ public class GameScreen implements Screen, InputProcessor {
         //make doggo and add to the list of entities
         entities = new ArrayList<Entity>();
         herd = new ArrayList<Animal>();
-        doggo = new SheepDog(new Vector3(100,20,0),12);
-        Coin coin = new Coin(new Vector3(128, 500,0));
+        doggo = new SheepDog(new Vector3(100,20,0),12, world);
+        Coin coin = new Coin(new Vector3(128, 500,0), world);
         entities.add(coin);
         stage.addActor(coin);
         entities.add(doggo);
@@ -86,7 +86,7 @@ public class GameScreen implements Screen, InputProcessor {
         stage.addActor(doggo);
         //creates a sheeps
         for (int sheepcount=0; sheepcount<26; sheepcount++){
-            Sheep bob = new Sheep(new Vector3((float)(140*Math.random()+50),(float)(200*Math.random()+250),0));
+            Sheep bob = new Sheep(new Vector3((float)(140*Math.random()+50),(float)(200*Math.random()+250),0), world);
             entities.add(bob);
             stage.addActor(bob);
             //throw him in the herd as well
@@ -113,11 +113,10 @@ public class GameScreen implements Screen, InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         double x = Math.random();
         if(x < 0.0019){
-            Coin coin = new Coin(new Vector3((float)(196*Math.random() + 30), 500, 0));
+            Coin coin = new Coin(new Vector3((float)(196*Math.random() + 30), 500, 0), world);
             entities.add(coin);
             stage.addActor(coin);
         }
-        System.out.println(distanceTravelled);
 
         checkCollisions();
         /*
@@ -190,12 +189,10 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void pause() {
-        System.out.println("PAUSED");
     }
 
     @Override
     public void resume() {
-        System.out.println("RESUMING");
     }
 
     @Override

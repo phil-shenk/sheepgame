@@ -15,8 +15,8 @@ public class Sheep extends Animal{
     private boolean fleeing = false;
     float sheepCounter;
     private boolean returning = false;
-    public Sheep(Vector3 pos){
-        this.pos = pos;
+    public Sheep(Vector3 pos, World world){
+        super(pos, world);
     }
 
     public Sheep(float newx, float newy, World world){
@@ -35,7 +35,7 @@ public class Sheep extends Animal{
         sheepCounter += delta;
         inHerd();
         if (!fleeing) {
-            wander();
+            wander(delta);
             //returnToHerd(delta);
         } else if (fleeing) {
             flee(delta);
@@ -69,12 +69,9 @@ public class Sheep extends Animal{
 
     }
     public void flee(float delta){
-        System.out.println("yeargH!");
         translate(0,-70f*delta);
     }
     public void wander(float delta){
-        System.out.println("wanderoni");
-        System.out.println(pos.x);
         translate((float)(delta*Math.random()*120), (float)(delta*Math.random()*200));
         translate(-(float)(delta*Math.random()*120), -(float)(delta*Math.random()*200));
         //setPosition(((float)(pos.x+2.5*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.cos(6*sheepCounter*Math.random()))), ((float)(pos.y+3*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.sin(6*sheepCounter*Math.random()))));
@@ -112,7 +109,6 @@ public class Sheep extends Animal{
     public boolean inHerd(){
         if(!returning){
             if( 30  > pos.x  || pos.x > 226){
-                System.out.println(pos.x);
                 fleeing = true;
             }
             else if ( pos.y < 200 || pos.y>512){
