@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapLayer;
@@ -39,6 +40,8 @@ public class GameScreen implements Screen, InputProcessor {
     private TiledMapImageLayer imageLayer;
     private TiledMapTileLayer tileLayer;
     private TiledMap map;
+    BitmapFont font;
+
 
     //beautiful stage
     private Stage stage;
@@ -49,6 +52,7 @@ public class GameScreen implements Screen, InputProcessor {
     private ArrayList<Animal> herd;
 
     private int coinCount=0;
+    private int sheepCount=0;
 
     SheepDog doggo;
 
@@ -59,6 +63,10 @@ public class GameScreen implements Screen, InputProcessor {
         viewport = new FitViewport(viewportWidth, viewportHeight, camera);
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
+
+        //text stuff
+        font = new BitmapFont();
+        font.getData().setScale(3,2);
 
         //2nd camera for scrolling
         //scrollingCamera =new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
@@ -72,7 +80,7 @@ public class GameScreen implements Screen, InputProcessor {
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f);
 
         //box2d stuff
-        world = new World(new Vector2(0, -98f), true);
+        world = new World(new Vector2(0, 0), true);
 
         //stage stuff
         stage = new Stage(viewport);
@@ -87,7 +95,7 @@ public class GameScreen implements Screen, InputProcessor {
         //put the doggo on the stage to perform his wonderful acts
         stage.addActor(doggo);
         //creates a sheeps
-        for (int sheepcount=0; sheepcount<26; sheepcount++){
+        for (int sheepcount=0; sheepcount<123; sheepcount++){
             Sheep bob = new Sheep(new Vector3((float)((viewportWidth-(.2*viewportWidth))*Math.random()+(.08*viewportWidth)),(float)((.4*viewportHeight)*Math.random()+(.5*viewportHeight)),0), world);
             entities.add(bob);
             stage.addActor(bob);
@@ -141,7 +149,7 @@ public class GameScreen implements Screen, InputProcessor {
         scrollingCamera.translate(0,dy);
         distanceTravelled += dy;
         scrollingCamera.update();
-        System.out.println(distanceTravelled);
+        //System.out.println(distanceTravelled);
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.ellipse(rect.x, rect.y, 10, 10);
@@ -151,12 +159,11 @@ public class GameScreen implements Screen, InputProcessor {
         //camera.translate(0,dy);
         //doggo.translate(0,dy);
 
-        Animal a = doggo;
-        //for(Animal a : herd){
+        for(Animal a : herd){
            if(a.killMeNow){
 
            }
-        //}
+        }
 
         //check if u at the top and need to cycle back around
 
@@ -170,6 +177,12 @@ public class GameScreen implements Screen, InputProcessor {
         //should make everything act
         stage.act();
         stage.draw();
+
+        batch.begin();
+        font.draw(batch, "You've collected "+coinCount+" coins", 10, viewportHeight*(.77f));
+        font.draw(batch, "You have herded  "+sheepCount+" sheep", 10, viewportHeight*(.72f));
+        batch.end();
+
 
         camera.update();
     }
@@ -193,6 +206,9 @@ public class GameScreen implements Screen, InputProcessor {
                             entities.remove(e);
                             e.remove();
                             coinCount++;
+                        }
+                        if(e.getClass()==Sheep.class){
+                            sheepCount++;
                         }
                     }
                 //}

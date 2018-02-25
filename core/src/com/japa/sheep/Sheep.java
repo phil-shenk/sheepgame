@@ -32,6 +32,14 @@ public class Sheep extends Animal{
 
     }
 
+    public void collidedWithDoggo(){
+        System.out.print("RETURNING IS NOW TRUE");
+        returning = true;
+        System.out.println(returning);
+        fleeing = false;
+        wandering = false;
+    }
+
     public void act(float delta) {
         hitbox.x = pos.x;
         hitbox.y = pos.y;
@@ -53,26 +61,56 @@ public class Sheep extends Animal{
 
     }
     public void returnToHerd(float delta){
+        float rand = (float)Math.random();
+        System.out.println("NEW SHEEP:\nx target="+(rand*viewportWidth*0.8f-viewportWidth/2));
+        Vector3 target = new Vector3((rand*viewportWidth*0.8f+viewportWidth/2), 0.75f*viewportHeight, 0);
+        //Vector3 target = new Vector3(0,0.75f*viewportHeight,0);
+        Vector3 dir = target.sub(pos);
+
+        if(dir.len()<10){
+            returning = false;
+            wandering = true;
+            fleeing = false;
+        }
+        System.out.println("DIR:"+dir);
+        dir.setLength(1f);
+        System.out.println("UNITDIR:"+dir);
+        //dir.rotate(((float)Math.random()*100f-50f),0,0,1);
+        System.out.println("PRESPOS:"+pos);
+        pos.add(dir);
+        System.out.println("POStPOS:"+pos);
+
+
+
+        /*
         if(pos.y < 200){
+            System.out.println("a");
             if(70 > pos.x){
+                System.out.println("b");
                 translate((float)(delta*80), (float)(delta*80));
             }
             if(pos.x > 186){
+                pos.
+                System.out.println("c");
                 translate((float)(delta*80), -(float)(delta*80));
             }
         }
         else if(70 > pos.x){
+            System.out.println("asdzzzzzzzzzzzzzzzzzzzzzzdojxvcvking");
             translate((float)(delta*60), (float)(delta*120*Math.random()));
             translate((float)(delta*60), (float)(delta*120*Math.random()));
         }
         else if(pos.x > 186){
+            System.out.println("sadhs aefhndojxvcvking");
             translate(-(float)(delta*60), (float)(delta*120*Math.random()));
             translate(-(float)(delta*60), -(float)(delta*120*Math.random()));
         }
         else {
+            System.out.println("nipe");
             returning = false;
             wander(delta);
         }
+        */
 
     }
     public void flee(float delta){
@@ -116,14 +154,17 @@ public class Sheep extends Animal{
     public void inHerd(){
         if(!returning){
             if( (int)(viewportWidth*.2)  > pos.x  || pos.x > (int)(viewportWidth*.8)){
+                //System.out.println("not returning, outside herd area (x)");
                 fleeing = true;
             }
             else if ( pos.y < (int)(viewportHeight*.4) || pos.y> (int)(viewportHeight*.99)){
+                //System.out.println("not returning, outside herd area (y)");
                 fleeing = true;
             }
             else{
+                //System.out.println("not returning, in the herd area");
                 double x = Math.random();
-                if( x < 0.00009){
+                if( x < 0.01009){
                     fleeing = true;
                 }
             }
