@@ -108,7 +108,7 @@ public class Sheep extends Animal{
     }
     public boolean inHerd(){
         if(!returning){
-            if( 30  > pos.x  || pos.x > 226){
+            if( pos.x < 75  || pos.x > (GameScreen.viewportWidth-75)){
                 fleeing = true;
             }
             else if ( pos.y < 200 || pos.y>512){

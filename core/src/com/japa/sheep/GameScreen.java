@@ -86,7 +86,7 @@ public class GameScreen implements Screen, InputProcessor {
         stage.addActor(doggo);
         //creates a sheeps
         for (int sheepcount=0; sheepcount<26; sheepcount++){
-            Sheep bob = new Sheep(new Vector3((float)((viewportWidth-80)*Math.random()+80),(float)(200*Math.random()+250),0), world);
+            Sheep bob = new Sheep(new Vector3((float)((viewportWidth-100)*Math.random()+60),(float)(200*Math.random()+250),0), world);
             entities.add(bob);
             stage.addActor(bob);
             //throw him in the herd as well
@@ -113,7 +113,7 @@ public class GameScreen implements Screen, InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         double x = Math.random();
         if(x < 0.0019){
-            Coin coin = new Coin(new Vector3((float)((viewportWidth-100)*Math.random() + 100), viewportHeight, 0), world);
+            Coin coin = new Coin(new Vector3((float)((viewportWidth-100)*Math.random() + 80), viewportHeight, 0), world);
             entities.add(coin);
             stage.addActor(coin);
         }
