@@ -150,7 +150,7 @@ public class GameScreen implements Screen, InputProcessor {
         float dy = 50f*delta;
         if(!lost) {
             scrollingCamera.translate(0, dy);
-            distanceTravelled += dy;
+            distanceTravelled += dy/10;
             scrollingCamera.update();
         }
 
@@ -188,7 +188,7 @@ public class GameScreen implements Screen, InputProcessor {
         if(!lost) {
             font.draw(batch, "You've herded your sheep " + (int) distanceTravelled + " meters", 10, viewportHeight * (.67f));
             font.draw(batch, "You've collected " + coinCount + " coins", 10, viewportHeight * (.77f));
-            font.draw(batch, "You have herded  " + sheepCount + " sheep", 10, viewportHeight * (.72f));
+            font.draw(batch, "You have a score of  " + sheepCount + " sheepscore :)", 10, viewportHeight * (.72f));
         }
         else {
             font.draw(batch, msg, 0, viewportHeight / 2);
