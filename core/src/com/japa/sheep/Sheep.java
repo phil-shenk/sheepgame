@@ -10,9 +10,9 @@ import com.badlogic.gdx.math.Vector3;
 public class Sheep extends Animal{
 
     static Texture texture = new Texture("sheep.png");
-    private boolean fleeing;
+    private boolean fleeing = false;
     float sheepCounter;
-    private boolean returning;
+    private boolean returning = false;
     public Sheep(Vector3 pos){
         this.pos = pos;
     }
@@ -31,7 +31,7 @@ public class Sheep extends Animal{
         sheepCounter += delta;
         inHerd();
         if (!fleeing) {
-            wander();
+            wander(delta);
             //returnToHerd(delta);
         } else if (fleeing) {
             flee(delta);
@@ -53,17 +53,20 @@ public class Sheep extends Animal{
         }
         else {
             returning = false;
-            wander();
+            wander(delta);
         }
 
     }
     public void flee(float delta){
         System.out.println("yeargH!");
-        translate(70f*delta,-70f*delta);
+        translate(0,-70f*delta);
     }
-    public void wander(){
+    public void wander(float delta){
         System.out.println("wanderoni");
-        setPosition(((float)(pos.x+2.5*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.cos(6*sheepCounter*Math.random()))), ((float)(pos.y+3*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.sin(6*sheepCounter*Math.random()))));
+        System.out.println(pos.x);
+        translate((float)(delta*Math.random()*120), (float)(delta*Math.random()*200));
+        translate(-(float)(delta*Math.random()*120), -(float)(delta*Math.random()*200));
+        //setPosition(((float)(pos.x+2.5*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.cos(6*sheepCounter*Math.random()))), ((float)(pos.y+3*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.sin(6*sheepCounter*Math.random()))));
     }
     public void die(){
 
@@ -97,10 +100,11 @@ public class Sheep extends Animal{
     }
     public boolean inHerd(){
         if(!returning){
-            if( 90 < pos.x  || pos.x < 166){
+            if( 50  > pos.x  || pos.x > 206){
+                System.out.println(pos.x);
                 fleeing = true;
             }
-            else if ( pos.y < 60){
+            else if ( pos.y < 200){
                 fleeing = true;
             }
 
