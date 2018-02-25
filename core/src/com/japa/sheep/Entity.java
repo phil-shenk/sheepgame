@@ -26,7 +26,8 @@ public abstract class Entity extends Actor{
     }
 
     public Vector3 getRelativePos(){
-        return pos.sub(cam.position);
+        //System.out.println("subtracting "+cam.position.y+" from "+pos.y);
+        return new Vector3(pos).sub(cam.position);
     }
     public Vector3 getRelativePos(Vector3 refPos){
         return pos.sub(refPos);
@@ -46,9 +47,7 @@ public abstract class Entity extends Actor{
     }
 
     public void translate(float dx, float dy){
-        System.out.println(pos.x+"old");
         pos.add(dx,dy,0);
-        System.out.println(pos.x);
     }
 
     public abstract Texture getSkin();

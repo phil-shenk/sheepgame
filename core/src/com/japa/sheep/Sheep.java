@@ -20,7 +20,7 @@ public class Sheep extends Animal{
 
     public Sheep(float newx, float newy, Camera cam){
         super(cam);
-        this.pos = new Vector3(newx,newy,0);
+        pos = new Vector3(newx,newy,0);
     }
 
     @Override
@@ -34,8 +34,8 @@ public class Sheep extends Animal{
         inHerd();
         if (!fleeing) {
             wander();
+            //returnToHerd(delta);
         } else if (fleeing) {
-
             flee(delta);
         }
         else if(returning){
@@ -44,11 +44,12 @@ public class Sheep extends Animal{
 
     }
     public void returnToHerd(float delta){
-        if(getRelativePos().y < 200){
-            if(70 < getRelativePos().x){
+        System.out.println("bacc to herd");
+        if(pos.y < 200){//was getRelativePos().y
+            if(70 < pos.x){//getRelativePos().x){
                 translate((float)(sheepCounter*50), (float)(sheepCounter*30));
             }
-            if(getRelativePos().x > 186){
+            if(pos.x > 186){//getRelativePos().x > 186){
                 translate((float)(sheepCounter*50), -(float)(sheepCounter*30));
             }
         }
@@ -59,9 +60,11 @@ public class Sheep extends Animal{
 
     }
     public void flee(float delta){
-        translate((float).7*delta,-100);
+        System.out.println("yeargH!");
+        translate(70f*delta,-70f*delta);
     }
     public void wander(){
+        System.out.println("wanderoni");
         setPosition(((float)(pos.x+2.5*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.cos(6*sheepCounter*Math.random()))), ((float)(pos.y+3*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.sin(6*sheepCounter*Math.random()))));
     }
     public void die(){
@@ -96,12 +99,13 @@ public class Sheep extends Animal{
     }
     public boolean inHerd(){
         if(!returning){
-            if( 90 < getRelativePos().x  || getRelativePos().x < 166){
+            if( 90 < pos.x  || pos.x < 166){ //was getRel
                 fleeing = true;
             }
-            else if ( getRelativePos().y < 60){
+            else if ( pos.y < 60){
                 fleeing = true;
             }
+
         }
 
         return fleeing;
