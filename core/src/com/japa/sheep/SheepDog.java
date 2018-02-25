@@ -1,5 +1,6 @@
 package com.japa.sheep;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -9,7 +10,8 @@ public class SheepDog extends Animal {
     static Texture texture = new Texture("sheepdog.png");
     int dogginess;
 
-    public SheepDog(Position pos, int dogginess){
+    public SheepDog(Position pos, int dogginess, Camera cam){
+        super(cam);
         //temp:
         this.pos = pos;
         this.dogginess = dogginess;

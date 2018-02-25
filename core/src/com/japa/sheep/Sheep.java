@@ -1,5 +1,6 @@
 package com.japa.sheep;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -11,11 +12,13 @@ public class Sheep extends Animal{
     private boolean fleeing;
     float sheepCounter;
     private boolean returning;
-    public Sheep(Position pos){
+    public Sheep(Position pos, Camera cam){
+        super(cam);
         this.pos = pos;
     }
 
-    public Sheep(float newx, float newy){
+    public Sheep(float newx, float newy, Camera cam){
+        super(cam);
         this.pos = new Position(newx,newy);
     }
 

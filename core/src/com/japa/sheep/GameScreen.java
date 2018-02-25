@@ -17,6 +17,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -41,6 +42,8 @@ public class GameScreen implements Screen, InputProcessor {
     //beautiful stage
     private Stage stage;
 
+    World world;
+
     private ArrayList<Entity> entities;
     private ArrayList<Animal> herd;
 
@@ -48,9 +51,9 @@ public class GameScreen implements Screen, InputProcessor {
 
     public GameScreen() {
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 400);
+        camera.setToOrtho(false, 256, 512);
 
-        viewport = new FitViewport(800, 400, camera);
+        viewport = new FitViewport(256, 512, camera);
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
 
@@ -59,18 +62,22 @@ public class GameScreen implements Screen, InputProcessor {
         tileLayer = (TiledMapTileLayer) map.getLayers().get(0);
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f);
 
+
+        //box2d stuff
+        world = new World(new Vector2(0, -98f), true);
+
         //stage stuff
         stage = new Stage(viewport);
         //make doggo and add to the list of entities
         entities = new ArrayList<Entity>();
         herd = new ArrayList<Animal>();
-        doggo = new SheepDog(new Position(100,20),12);
+        doggo = new SheepDog(new Position(100,20),12, camera);
         entities.add(doggo);
         //put the doggo on the stage to perform his wonderful acts
         stage.addActor(doggo);
 
         //creates a sheep
-        Sheep bob = new Sheep(new Position(150,150));
+        Sheep bob = new Sheep(new Position(150,150), camera);
         entities.add(bob);
         stage.addActor(bob);
         //throw him in the herd as well
@@ -93,9 +100,6 @@ public class GameScreen implements Screen, InputProcessor {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-
-
 
         mapRenderer.setView(camera);
         mapRenderer.render();
@@ -123,6 +127,12 @@ public class GameScreen implements Screen, InputProcessor {
     public void resize(int width, int height) {
         camera.update();
         viewport.update(width, height, false);
+    }
+
+    public void checkCollisions(){
+        for(Entity e : entities){
+
+        }
     }
 
     @Override
@@ -181,35 +191,21 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        rect.x = screenX;
-        rect.y = screenY;
-        //camera.position.x = screenX;
-        //camera.position.y = screenY;
-        //camera.update();
-        doggo.setX(screenX);
+        Vector3 mousePos = new Vector3(screenX, screenY,0);
+        //Vector3 center = new Vector3(viewport.getScreenX()/2, viewport.getScreenY()/2,0);
+        mousePos = viewport.unproject(mousePos);
 
-        //entities.get(0).setPosition(screenX, screenY);
+        doggo.setX(mousePos.x);
         return false;
     }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        rect.x = screenX;
-        rect.y = screenY;
-        //camera.position.x = screenX;
-        //camera.position.y = screenY;
         Vector3 mousePos = new Vector3(screenX, screenY,0);
         //Vector3 center = new Vector3(viewport.getScreenX()/2, viewport.getScreenY()/2,0);
-        System.out.println(mousePos.x+", "+ mousePos.y);
-        camera.unproject(mousePos);
-        System.out.println(mousePos.x+", "+ mousePos.y);
-        //entities.get(0).setPosition(mousePos.x, mousePos.y);
-        //camera.translate(mousePos.sub(center).scl(0.4f));
-        ////camera.translate(screenX-(viewport.getScreenWidth()/2), screenY-(viewport.getScreenHeight()/2));
-        ////camera.update();
-        ////entities.get(0).setPosition(screenX, screenY);
+        mousePos = viewport.unproject(mousePos);
 
-        doggo.setX(screenX);
+        doggo.setX(mousePos.x);
 
         return false;
     }

@@ -41,6 +41,10 @@ public class Position {
         this.x = newx;
     }
 
+    public Position subtract(Position pos){
+        return new Position(x-pos.x, y-pos.y);
+    }
+
     //move
     public void translate(float dx, float dy){
         x += dx;

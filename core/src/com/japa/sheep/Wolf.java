@@ -1,8 +1,14 @@
 package com.japa.sheep;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Wolf extends Animal {
+
+    public Wolf(Camera cam){
+        super(cam);
+    }
+
     @Override
     public void tick() {
 

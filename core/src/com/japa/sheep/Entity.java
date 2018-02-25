@@ -1,16 +1,30 @@
 package com.japa.sheep;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.sun.corba.se.spi.orbutil.proxy.CompositeInvocationHandler;
 
 public abstract class Entity extends Actor{
     Position pos;
+    Position relativePos;
     Texture skin;
+    Camera cam;
+
     public float speed;
     public abstract void tick();
+
+
+    public Entity(Camera cam){
+        this.cam = cam;
+    }
 
     public Position getPosition()
     {
         return pos;
+    }
+
+    public Position getRelativePos(Position refPos){
+        return pos.subtract(refPos);
     }
 
     public void setPosition(float newx, float newy)
