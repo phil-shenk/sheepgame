@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 public class Sheep extends Animal{
 
     static Texture texture = new Texture("sheep.png");
-
+    private boolean fleeing;
     float sheepCounter;
-
+    private boolean returning;
     public Sheep(Position pos){
         this.pos = pos;
     }
@@ -25,14 +25,25 @@ public class Sheep extends Animal{
     }
 
     public void act(float delta) {
-        sheepCounter+=6*delta*Math.random();
-        wander();
+        sheepCounter += delta;
+        if (!fleeing) {
+            wander();
+        } else if (fleeing) {
+            flee();
+        }
+        else if(returning){
+            returnToHerd();
+        }
     }
-    public void flee(){
+    public void returnToHerd(){
 
     }
+    public void flee(){
+        translate((float).7*sheepCounter,-100);
+        setPosition((float)(pos.getx()+.7*sheepCounter), (float)(pos.gety()-sheepCounter));
+    }
     public void wander(){
-        setPosition(((float)(pos.getx()+2.5*(Math.sin(2.1*sheepCounter)+.25*Math.sin(6*sheepCounter))*Math.cos(sheepCounter))), ((float)(pos.gety()+3*(Math.sin(2.1*sheepCounter)+.25*Math.sin(6*sheepCounter))*Math.sin(sheepCounter))));
+        setPosition(((float)(pos.getx()+2.5*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.cos(6*sheepCounter*Math.random()))), ((float)(pos.gety()+3*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.sin(6*sheepCounter*Math.random()))));
     }
     public void die(){
 
