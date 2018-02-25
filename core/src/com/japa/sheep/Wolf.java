@@ -3,6 +3,7 @@ package com.japa.sheep;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class Wolf extends Animal {
 
@@ -11,6 +12,7 @@ public class Wolf extends Animal {
     private boolean hasEaten = false;
 
     public void act(float delta) {
+        body.setTransform(pos.x, pos.y,0);
         if (chasing){
             if (hasEaten){
                 chasing = false;
@@ -30,10 +32,14 @@ public class Wolf extends Animal {
             System.out.println(delta);
         }
 
+
+
+
     }
 
 
-    public Wolf(){
+    public Wolf(Vector3 pos, World world){
+        super(pos, world);
     }
 
     @Override

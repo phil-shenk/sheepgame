@@ -14,10 +14,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.math.*;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -33,8 +31,8 @@ public class GameScreen implements Screen, InputProcessor {
     private ShapeRenderer shapeRenderer;
     private Rectangle rect;
     private FitViewport viewport;
-    int viewportWidth = 256;
-    int viewportHeight= 512;
+    static final int viewportWidth = 512;
+    static final int viewportHeight= 512;
     int distanceTravelled = 0;
     //map stuff
     private OrthogonalTiledMapRenderer mapRenderer;
@@ -70,7 +68,6 @@ public class GameScreen implements Screen, InputProcessor {
         map = new TmxMapLoader().load("mapperoni.tmx");
         tileLayer = (TiledMapTileLayer) map.getLayers().get(0);
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f);
-
 
         //box2d stuff
         world = new World(new Vector2(0, -98f), true);
@@ -121,6 +118,8 @@ public class GameScreen implements Screen, InputProcessor {
             stage.addActor(coin);
         }
         System.out.println(distanceTravelled);
+
+        checkCollisions();
         /*
         this.renderer.setView(scrollingCamera);
         this.renderer.render(); // Render tiles
@@ -131,6 +130,10 @@ public class GameScreen implements Screen, InputProcessor {
         // Render other stuff
         camera.update();
         */
+
+        world.step(delta, 6 ,2);
+
+
         mapRenderer.setView(scrollingCamera);
         mapRenderer.render();
         float dy = 50f*delta;
@@ -153,19 +156,9 @@ public class GameScreen implements Screen, InputProcessor {
 
         //check if u at the top and need to cycle back around
 
-
-        System.out.println(scrollingCamera.position);
-
-        if((scrollingCamera.position.y-scrollingCamera.viewportHeight/2) > 2600) {
+        if((scrollingCamera.position.y-scrollingCamera.viewportHeight/2) > 20) {
             scrollingCamera.position.y = scrollingCamera.viewportHeight/2;
-            /*
-            camera.position.y = 256;
-            System.out.println(camera.position.y);
-            camera.position.x += 128;
-
-            doggo.pos.y = 20;//doggo.getRelativePos().y;
-            doggo.pos.x += 128;
-            */
+            //updateMap();
         }
 
 
@@ -184,8 +177,14 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     public void checkCollisions(){
-        for(Entity e : entities){
-
+        for(Entity e1 : entities){
+            for(Entity e2 : entities){
+                if(!(e1 == e2)){
+                    if(e1.hitbox.overlaps(e2.hitbox)) {
+                        e1.collidedWith(e2);
+                    }
+                }
+            }
         }
     }
 
@@ -222,9 +221,9 @@ public class GameScreen implements Screen, InputProcessor {
     @Override
     public boolean keyTyped(char character) {
         switch(character){
-        case ' ':
+        case '+':
             System.out.println(character);
-            pause();
+            doggo.translate(0,0,-1);
             break;
         default:
             System.out.println(character);
@@ -264,6 +263,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         if (mousePos.x>0 && mousePos.x<viewportWidth){
             doggo.pos.x =mousePos.x;
+            doggo.pos.y =mousePos.y;
         }
 
         return false;
@@ -275,3 +275,4 @@ public class GameScreen implements Screen, InputProcessor {
         return false;
     }
 }
+

@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.World;
 
 
 public class Sheep extends Animal{
@@ -17,8 +19,8 @@ public class Sheep extends Animal{
         this.pos = pos;
     }
 
-    public Sheep(float newx, float newy){
-        pos = new Vector3(newx,newy,0);
+    public Sheep(float newx, float newy, World world){
+        super(new Vector3(newx, newy, 0), world);
     }
 
     @Override
@@ -27,12 +29,14 @@ public class Sheep extends Animal{
     }
 
     public void act(float delta) {
-
+        hitbox.x = pos.x;
+        hitbox.y = pos.y;
+        //body.setTransform(pos.x, pos.y,0);
         sheepCounter += delta;
         inHerd();
         if (!fleeing) {
-            //wander(delta);
-            returnToHerd(delta);
+            wander();
+            //returnToHerd(delta);
         } else if (fleeing) {
             flee(delta);
         }
@@ -42,7 +46,6 @@ public class Sheep extends Animal{
 
     }
     public void returnToHerd(float delta){
-        System.out.println("bacc to herd");
         if(pos.y < 200){
             if(70 > pos.x){
                 translate((float)(delta*80), (float)(delta*80));

@@ -3,9 +3,15 @@ package com.japa.sheep;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.World;
+
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
 public class Coin extends Thing {
+
+    public Coin(Vector3 pos, World world){
+        super(pos, world);
     static Texture texture = new Texture("coin.jpg");
     public Coin(Vector3 pos){
         this.pos = pos;
@@ -16,12 +22,18 @@ public class Coin extends Thing {
     }
 
     public void act(float delta){
+        hitbox.x = pos.x;
+        hitbox.y = pos.y;
         /**
          * if collides w/ dog,
          */
         //else{
             translate(0, -100f*delta);
         //}
+    }
+    @Override
+    public void collidedWith(Entity e){
+        System.out.println("COLLIDED WITH "+e.toString());
     }
     @Override
     public Texture getSkin() {
