@@ -107,7 +107,13 @@ public class Sheep extends Animal{
             else if ( pos.y < 200){
                 fleeing = true;
             }
-
+            else{
+                double x = Math.random();
+                if( x < 0.0009){
+                    fleeing = true;
+                }
+                return fleeing;
+            }
         }
 
         return fleeing;
