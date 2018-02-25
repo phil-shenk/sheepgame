@@ -33,6 +33,8 @@ public class GameScreen implements Screen, InputProcessor {
     private ShapeRenderer shapeRenderer;
     private Rectangle rect;
     private FitViewport viewport;
+    int viewportWidth = 256;
+    int viewportHeight= 512;
 
     //map stuff
     private OrthogonalTiledMapRenderer mapRenderer;
@@ -52,16 +54,16 @@ public class GameScreen implements Screen, InputProcessor {
 
     public GameScreen() {
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 256, 512);
+        camera.setToOrtho(false, viewportWidth, viewportHeight);
 
-        viewport = new FitViewport(256, 512, camera);
+        viewport = new FitViewport(viewportWidth, viewportHeight, camera);
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
 
         //2nd camera for scrolling
         //scrollingCamera =new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        scrollingCamera =new OrthographicCamera(256,512);
-        scrollingCamera.translate(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+        scrollingCamera =new OrthographicCamera(viewportWidth,viewportHeight);
+        scrollingCamera.translate(viewportWidth/2,viewportHeight/2);
         scrollingCamera.update();
 
         //map stuff
@@ -139,19 +141,22 @@ public class GameScreen implements Screen, InputProcessor {
 
         //check if u at the top and need to cycle back around
 
-        /*
-        if(camera.position.y > 300) {
+
+        System.out.println(scrollingCamera.position);
+
+        if((scrollingCamera.position.y-scrollingCamera.viewportHeight/2) > 20) {
+            scrollingCamera.position.y = scrollingCamera.viewportHeight/2;
+            /*
             camera.position.y = 256;
             System.out.println(camera.position.y);
             camera.position.x += 128;
 
             doggo.pos.y = 20;//doggo.getRelativePos().y;
-            System.out.println("DOG" + doggo.getRelativePos().y + "dogCamRef=" + doggo.cam.position.y);
-            System.out.println(doggo.getX() + "pre=" + doggo.pos.x);
             doggo.pos.x += 128;
-            System.out.println(doggo.getX() + "=" + doggo.pos.x);
+            */
         }
-        */
+
+
 
         //should make everything act
         stage.act();
