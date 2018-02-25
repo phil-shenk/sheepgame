@@ -35,7 +35,7 @@ public class GameScreen implements Screen, InputProcessor {
     private FitViewport viewport;
     int viewportWidth = 256;
     int viewportHeight= 512;
-
+    int distanceTravelled = 0;
     //map stuff
     private OrthogonalTiledMapRenderer mapRenderer;
     private TiledMapImageLayer imageLayer;
@@ -120,6 +120,7 @@ public class GameScreen implements Screen, InputProcessor {
             entities.add(coin);
             stage.addActor(coin);
         }
+        System.out.println(distanceTravelled);
         /*
         this.renderer.setView(scrollingCamera);
         this.renderer.render(); // Render tiles
@@ -134,6 +135,7 @@ public class GameScreen implements Screen, InputProcessor {
         mapRenderer.render();
         float dy = 50f*delta;
         scrollingCamera.translate(0,dy);
+        distanceTravelled += (int) dy;
         scrollingCamera.update();
 
         shapeRenderer.setProjectionMatrix(camera.combined);
