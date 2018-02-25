@@ -78,7 +78,7 @@ public class GameScreen implements Screen, InputProcessor {
         entities = new ArrayList<Entity>();
         herd = new ArrayList<Animal>();
         doggo = new SheepDog(new Vector3(100,20,0),12, world);
-        Coin coin = new Coin(new Vector3(128, 500,0), world);
+        Coin coin = new Coin(new Vector3(viewportWidth/2, viewportHeight,0), world);
         entities.add(coin);
         stage.addActor(coin);
         entities.add(doggo);
@@ -113,7 +113,7 @@ public class GameScreen implements Screen, InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         double x = Math.random();
         if(x < 0.0019){
-            Coin coin = new Coin(new Vector3((float)(196*Math.random() + 30), 500, 0), world);
+            Coin coin = new Coin(new Vector3((float)((viewportWidth-100)*Math.random() + 100), viewportHeight, 0), world);
             entities.add(coin);
             stage.addActor(coin);
         }
