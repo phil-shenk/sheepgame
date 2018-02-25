@@ -35,11 +35,8 @@ public class Sheep extends Animal{
     }
 
     public void collidedWithDoggo(){
-        System.out.print("RETURNING IS NOW TRUE");
         returning = true;
-
         target = new Vector3(((float)Math.random()*viewportWidth*0.4f+viewportWidth*0.3f), 0.75f*viewportHeight, 0);
-        System.out.println("set target to "+target);
         fleeing = false;
         wandering = false;
     }
@@ -67,9 +64,7 @@ public class Sheep extends Animal{
     public void returnToHerd(float delta){
 
         //Vector3 target = new Vector3(0,0.75f*viewportHeight,0);
-        System.out.println("Targ:"+target);
         Vector3 dir = new Vector3(target).sub(pos);
-        System.out.println("Targpostsub:"+target);
 
         if(dir.len()<10){
             returning = false;
@@ -77,13 +72,9 @@ public class Sheep extends Animal{
             fleeing = false;
         }
 
-        System.out.println("DIR:"+dir);
         dir.setLength(1f);
-        System.out.println("UNITDIR:"+dir);
         //dir.rotate(((float)Math.random()*100f-50f),0,0,1);
-        System.out.println("PRESPOS:"+pos);
         pos.add(dir);
-        System.out.println("POStPOS:"+pos);
 
     }
     public void flee(float delta){

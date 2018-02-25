@@ -54,6 +54,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     private int coinCount=0;
     private int sheepCount=0;
+    boolean lost = false;
 
     SheepDog doggo;
 
@@ -147,9 +148,13 @@ public class GameScreen implements Screen, InputProcessor {
         mapRenderer.setView(scrollingCamera);
         mapRenderer.render();
         float dy = 50f*delta;
-        scrollingCamera.translate(0,dy);
-        distanceTravelled += dy;
-        scrollingCamera.update();
+        if(!lost) {
+            scrollingCamera.translate(0, dy);
+            distanceTravelled += dy;
+            scrollingCamera.update();
+        }
+
+
         //System.out.println(distanceTravelled);
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -160,8 +165,10 @@ public class GameScreen implements Screen, InputProcessor {
         //camera.translate(0,dy);
         //doggo.translate(0,dy);
 
-        if(entities.size() <11){
-            msg = "YOU LOST, your \nherd has dwindled too far";
+        if(entities.size() <10){
+            msg = "Game over, your \nherd has dwindled too far\nFinal coins: "+coinCount+"\nFinal sheep herded: "+sheepCount;
+            stage.clear();
+            lost =true;
         }
 
         //check if u at the top and need to cycle back around
@@ -178,10 +185,14 @@ public class GameScreen implements Screen, InputProcessor {
         stage.draw();
 
         batch.begin();
-        font.draw(batch, "You've herded your sheep " + (int)distanceTravelled+ " meters", 10, viewportHeight*(.67f));
-        font.draw(batch, "You've collected "+coinCount+" coins", 10, viewportHeight*(.77f));
-        font.draw(batch, "You have herded  "+sheepCount+" sheep", 10, viewportHeight*(.72f));
-        font.draw(batch, msg, viewportHeight/2, 0);
+        if(!lost) {
+            font.draw(batch, "You've herded your sheep " + (int) distanceTravelled + " meters", 10, viewportHeight * (.67f));
+            font.draw(batch, "You've collected " + coinCount + " coins", 10, viewportHeight * (.77f));
+            font.draw(batch, "You have herded  " + sheepCount + " sheep", 10, viewportHeight * (.72f));
+        }
+        else {
+            font.draw(batch, msg, 0, viewportHeight / 2);
+        }
         batch.end();
 
 
