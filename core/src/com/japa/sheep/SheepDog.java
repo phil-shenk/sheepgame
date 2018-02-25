@@ -10,10 +10,8 @@ public class SheepDog extends Animal {
     int dogginess;
 
     public SheepDog(Position pos, int dogginess){
-        //skin = texture;
         //temp:
         this.pos = pos;
-        skin = new Texture("sheepdog.png");
         this.dogginess = dogginess;
     }
     @Override
@@ -30,7 +28,7 @@ public class SheepDog extends Animal {
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
         //batch.draw(region, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-        batch.draw(skin, pos.getx(), pos.gety());
+        batch.draw(texture, pos.getx(), pos.gety());
     }
 
     /**

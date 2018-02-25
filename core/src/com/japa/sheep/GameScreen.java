@@ -41,9 +41,13 @@ public class GameScreen implements Screen, InputProcessor {
         entities = new ArrayList<Entity>();
         SheepDog doggo = new SheepDog(new Position(100,100),12);
         entities.add(doggo);
-        Sheep bob = new Sheep(new Position(150,150));
         //put the doggo on the stage to perform his wonderful acts
         stage.addActor(doggo);
+
+        //creates a sheep
+        Sheep bob = new Sheep(new Position(150,150));
+        entities.add(bob);
+        stage.addActor(bob);
 
         rect = new Rectangle();
         rect.x = 20;
