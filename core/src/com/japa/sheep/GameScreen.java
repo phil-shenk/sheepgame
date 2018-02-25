@@ -48,6 +48,8 @@ public class GameScreen implements Screen, InputProcessor {
     private ArrayList<Entity> entities;
     private ArrayList<Animal> herd;
 
+    private int coinCount=0;
+
     SheepDog doggo;
 
     public GameScreen() {
@@ -149,8 +151,11 @@ public class GameScreen implements Screen, InputProcessor {
         //camera.translate(0,dy);
         //doggo.translate(0,dy);
 
+        Animal a = doggo;
         //for(Animal a : herd){
-           //a.translate(0,dy);
+           if(a.killMeNow){
+
+           }
         //}
 
         //check if u at the top and need to cycle back around
@@ -176,13 +181,27 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     public void checkCollisions(){
-        for(Entity e1 : entities){
-            for(Entity e2 : entities){
-                if(!(e1 == e2)){
-                    if(e1.hitbox.overlaps(e2.hitbox)) {
-                        e1.collidedWith(e2);
+        Entity e;
+        //for(Entity e1 : entities){
+        for(int i=0; i<entities.size(); i++){
+            e = entities.get(i);
+            //for(Entity e2 : entities){
+                //if(!(e1 == e2)){
+                    if(doggo.hitbox.overlaps(e.hitbox)) {
+                        e.collidedWithDoggo();
+                        if(e.getClass()==Coin.class){
+                            entities.remove(e);
+                            e.remove();
+                            coinCount++;
+                        }
                     }
-                }
+                //}
+            //}
+            if(e.pos.y < 0){
+                entities.remove(e);
+                e.remove();
+                //sheep can still be ONE WITH THE HERD
+                e.killMeNow = true;
             }
         }
     }

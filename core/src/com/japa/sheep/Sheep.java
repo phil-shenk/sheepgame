@@ -34,15 +34,17 @@ public class Sheep extends Animal{
         //body.setTransform(pos.x, pos.y,0);
         sheepCounter += delta;
         inHerd();
+
+        if(returning){
+            returnToHerd(delta);
+        }else{
         if (!fleeing) {
             wander(delta);
             //returnToHerd(delta);
-        } else if (fleeing) {
+        } else{
             flee(delta);
-        }
-        else if(returning){
-            returnToHerd(delta);
-        }
+        }}
+
 
     }
     public void returnToHerd(float delta){
@@ -78,6 +80,12 @@ public class Sheep extends Animal{
     }
     public void die(){
 
+    }
+
+    public void collidedWith(Entity e){
+        if(e.getClass()==SheepDog.class){
+            returning = true;
+        }
     }
     @Override
     public Vector3 getPosition() {
@@ -116,7 +124,7 @@ public class Sheep extends Animal{
             }
             else{
                 double x = Math.random();
-                if( x < 0.00009){
+                if( x < 0.01009){
                     fleeing = true;
                 }
                 return fleeing;

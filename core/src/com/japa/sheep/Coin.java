@@ -32,6 +32,8 @@ public class Coin extends Thing {
     }
     @Override
     public void collidedWith(Entity e){
+        if(e.getClass()==SheepDog.class){
+        }
     }
     @Override
     public Texture getSkin() {

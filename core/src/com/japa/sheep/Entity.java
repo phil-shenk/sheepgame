@@ -15,6 +15,7 @@ public abstract class Entity extends Actor{
     Body body;
     BodyDef bodyDef;
     Rectangle hitbox;
+    boolean killMeNow = false;
 
     public float speed;
     public abstract void tick();
@@ -58,6 +59,10 @@ public abstract class Entity extends Actor{
     }
 
     public void collidedWith(Entity e){
+
+    }
+
+    public void collidedWithDoggo(){
 
     }
 
