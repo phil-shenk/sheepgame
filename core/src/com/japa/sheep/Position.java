@@ -41,6 +41,12 @@ public class Position {
         this.x = newx;
     }
 
+    //move
+    public void translate(float dx, float dy){
+        x += dx;
+        y += dy;
+    }
+
     //Set y method
     public void sety(float newy)
     {

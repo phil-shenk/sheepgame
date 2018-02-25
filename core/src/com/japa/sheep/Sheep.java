@@ -25,7 +25,6 @@ public class Sheep extends Animal{
     }
 
     public void act(float delta) {
-        System.out.println("Bahahaha!");
         sheepCounter+=6*delta*Math.random();
         wander();
     }

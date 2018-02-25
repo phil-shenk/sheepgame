@@ -10,13 +10,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SheepGame extends Game {
     SpriteBatch batch;
-    Texture img;
 
 	@Override
 	public void create () {
 		System.out.println("SHEEPGAME CREATING");
 		batch = new SpriteBatch();
-		img = new Texture("sheep.png");
 		setScreen(new GameScreen());
 	}
 
@@ -28,6 +26,5 @@ public class SheepGame extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 	}
 }

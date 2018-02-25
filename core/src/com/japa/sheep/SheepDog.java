@@ -16,11 +16,9 @@ public class SheepDog extends Animal {
     }
     @Override
     public void tick() {
-        System.out.println("ticc?");
     }
 
     public void act(float delta){
-        System.out.println("hea?");
     }
 
     @Override

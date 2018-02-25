@@ -18,6 +18,17 @@ public abstract class Entity extends Actor{
         pos.setPosition(newx, newy);
     }
 
+    public void setX(float x){
+        pos.setx(x);
+    }
+    public void setY(float y){
+        pos.sety(y);
+    }
+
+    public void translate(float dx, float dy){
+        pos.translate(dx,dy);
+    }
+
     public abstract Texture getSkin();
 
     public abstract void setSkin();
