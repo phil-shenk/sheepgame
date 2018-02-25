@@ -132,7 +132,7 @@ public class GameScreen implements Screen, InputProcessor {
         */
         mapRenderer.setView(scrollingCamera);
         mapRenderer.render();
-        float dy = 30f*delta;
+        float dy = 50f*delta;
         scrollingCamera.translate(0,dy);
         scrollingCamera.update();
 
@@ -154,7 +154,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         System.out.println(scrollingCamera.position);
 
-        if((scrollingCamera.position.y-scrollingCamera.viewportHeight/2) > 20) {
+        if((scrollingCamera.position.y-scrollingCamera.viewportHeight/2) > 2600) {
             scrollingCamera.position.y = scrollingCamera.viewportHeight/2;
             /*
             camera.position.y = 256;
