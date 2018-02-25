@@ -86,11 +86,14 @@ public class GameScreen implements Screen, InputProcessor {
         stage.addActor(doggo);
 
         //creates a sheep
-        Sheep bob = new Sheep(new Vector3(150,150,0));
-        entities.add(bob);
-        stage.addActor(bob);
-        //throw him in the herd as well
-        herd.add(bob);
+        for (int sheepcount=0; sheepcount<6; sheepcount++){
+            Sheep bob = new Sheep(new Vector3((float)(100+50*Math.sin(sheepcount)),(float)(300-75*Math.cos(sheepcount)),0));
+            entities.add(bob);
+            stage.addActor(bob);
+            //throw him in the herd as well
+            herd.add(bob);
+        }
+
 
         rect = new Rectangle();
         rect.x = 20;
@@ -237,7 +240,7 @@ public class GameScreen implements Screen, InputProcessor {
         //Vector3 center = new Vector3(viewport.getScreenX()/2, viewport.getScreenY()/2,0);
         viewport.unproject(mousePos);
 
-        if (mousePos.x>0 && mousePos.x<256){
+        if (mousePos.x>0 && mousePos.x<viewportWidth){
             doggo.pos.x =mousePos.x;
         }
         return false;
@@ -250,7 +253,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         viewport.unproject(mousePos);
 
-        if (mousePos.x>0 && mousePos.x<256){
+        if (mousePos.x>0 && mousePos.x<viewportWidth){
             doggo.pos.x =mousePos.x;
         }
 
