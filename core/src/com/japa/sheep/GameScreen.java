@@ -81,11 +81,13 @@ public class GameScreen implements Screen, InputProcessor {
         entities = new ArrayList<Entity>();
         herd = new ArrayList<Animal>();
         doggo = new SheepDog(new Vector3(100,20,0),12);
+        Coin coin = new Coin(new Vector3(128, 500,0));
+        entities.add(coin);
+        stage.addActor(coin);
         entities.add(doggo);
         //put the doggo on the stage to perform his wonderful acts
         stage.addActor(doggo);
-
-        //creates a sheep
+        //creates a sheeps
         for (int sheepcount=0; sheepcount<26; sheepcount++){
             Sheep bob = new Sheep(new Vector3((float)(140*Math.random()+50),(float)(200*Math.random()+250),0));
             entities.add(bob);
@@ -112,7 +114,12 @@ public class GameScreen implements Screen, InputProcessor {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        double x = Math.random();
+        if(x < 0.0019){
+            Coin coin = new Coin(new Vector3((float)(196*Math.random() + 30), 500, 0));
+            entities.add(coin);
+            stage.addActor(coin);
+        }
         /*
         this.renderer.setView(scrollingCamera);
         this.renderer.render(); // Render tiles
