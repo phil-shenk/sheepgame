@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Coin extends Thing {
 
-    public Coin(Camera cam){
-        super(cam);
+    public Coin(){
+
     }
     @Override
     public void tick() {

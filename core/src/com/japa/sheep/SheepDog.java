@@ -11,8 +11,7 @@ public class SheepDog extends Animal {
     static Texture texture = new Texture("sheepdog.png");
     int dogginess;
 
-    public SheepDog(Vector3 pos, int dogginess, Camera cam){
-        super(cam);
+    public SheepDog(Vector3 pos, int dogginess){
         //temp:
         this.pos = pos;
         this.dogginess = dogginess;

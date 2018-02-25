@@ -33,8 +33,7 @@ public class Wolf extends Animal {
     }
 
 
-    public Wolf(Camera cam){
-        super(cam);
+    public Wolf(){
     }
 
     @Override

@@ -1,23 +1,18 @@
 package com.japa.sheep;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.sun.corba.se.spi.orbutil.proxy.CompositeInvocationHandler;
 
 public abstract class Entity extends Actor{
     Vector3 pos;
     Vector3 relativePos;
     Texture skin;
-    Camera cam;
 
     public float speed;
     public abstract void tick();
 
 
-    public Entity(Camera cam){
-        this.cam = cam;
+    public Entity(){
     }
 
     public Vector3 getPosition()
@@ -25,12 +20,8 @@ public abstract class Entity extends Actor{
         return pos;
     }
 
-    public Vector3 getRelativePos(){
-        //System.out.println("subtracting "+cam.position.y+" from "+pos.y);
-        return new Vector3(pos).sub(cam.position);
-    }
     public Vector3 getRelativePos(Vector3 refPos){
-        return pos.sub(refPos);
+        return new Vector3(pos).sub(refPos);
     }
 
     public void setPosition(float newx, float newy)

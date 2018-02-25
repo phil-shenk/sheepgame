@@ -13,13 +13,11 @@ public class Sheep extends Animal{
     private boolean fleeing;
     float sheepCounter;
     private boolean returning;
-    public Sheep(Vector3 pos, Camera cam){
-        super(cam);
+    public Sheep(Vector3 pos){
         this.pos = pos;
     }
 
-    public Sheep(float newx, float newy, Camera cam){
-        super(cam);
+    public Sheep(float newx, float newy){
         pos = new Vector3(newx,newy,0);
     }
 
@@ -45,11 +43,11 @@ public class Sheep extends Animal{
     }
     public void returnToHerd(float delta){
         System.out.println("bacc to herd");
-        if(pos.y < 200){//was getRelativePos().y
-            if(70 < pos.x){//getRelativePos().x){
+        if(pos.y < 200){
+            if(70 < pos.x){
                 translate((float)(sheepCounter*50), (float)(sheepCounter*30));
             }
-            if(pos.x > 186){//getRelativePos().x > 186){
+            if(pos.x > 186){
                 translate((float)(sheepCounter*50), -(float)(sheepCounter*30));
             }
         }
@@ -99,7 +97,7 @@ public class Sheep extends Animal{
     }
     public boolean inHerd(){
         if(!returning){
-            if( 90 < pos.x  || pos.x < 166){ //was getRel
+            if( 90 < pos.x  || pos.x < 166){
                 fleeing = true;
             }
             else if ( pos.y < 60){
