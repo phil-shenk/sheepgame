@@ -23,6 +23,9 @@ public abstract class Entity extends Actor{
         return pos;
     }
 
+    public Position getRelativePos(){
+        return pos.subtract(new Position(cam.position.x, cam.position.y));
+    }
     public Position getRelativePos(Position refPos){
         return pos.subtract(refPos);
     }
