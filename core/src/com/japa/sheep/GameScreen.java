@@ -206,7 +206,9 @@ public class GameScreen implements Screen, InputProcessor {
         //Vector3 center = new Vector3(viewport.getScreenX()/2, viewport.getScreenY()/2,0);
         mousePos = viewport.unproject(mousePos);
 
-        doggo.setX(mousePos.x);
+        if (mousePos.x>0 && mousePos.x<256){
+            doggo.setX(mousePos.x);
+        }
 
         return false;
     }
