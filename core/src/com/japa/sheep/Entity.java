@@ -23,6 +23,7 @@ public abstract class Entity extends Actor{
     public Entity(Vector3 pos, World world){
         this.pos = pos;
         //set up box2D stuff
+        /*
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(pos.x+width/2, pos.y+height/2);
@@ -34,7 +35,7 @@ public abstract class Entity extends Actor{
         fixtureDef.density = 1f;
         Fixture fixture = body.createFixture(fixtureDef);
         shape.dispose();
-        System.out.println(body.getFixtureList().get(0).getShape().getRadius());
+        */
 
         hitbox = new Rectangle(pos.x+(width/2), pos.y+(height/2), width, height);
 

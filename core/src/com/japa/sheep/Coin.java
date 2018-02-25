@@ -13,7 +13,7 @@ public class Coin extends Thing {
     public Coin(Vector3 pos, World world) {
         super(pos, world);
     }
-    static Texture texture = new Texture("coin.jpg");
+    static Texture texture = new Texture("coin.png");
 
     @Override
     public void tick() {

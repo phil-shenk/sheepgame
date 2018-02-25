@@ -260,7 +260,6 @@ public class GameScreen implements Screen, InputProcessor {
 
         if (mousePos.x>0 && mousePos.x<viewportWidth){
             doggo.pos.x =mousePos.x;
-            doggo.pos.y =mousePos.y;
         }
 
         return false;
