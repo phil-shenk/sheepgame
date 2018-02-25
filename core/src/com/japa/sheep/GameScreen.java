@@ -86,7 +86,7 @@ public class GameScreen implements Screen, InputProcessor {
         stage.addActor(doggo);
         //creates a sheeps
         for (int sheepcount=0; sheepcount<26; sheepcount++){
-            Sheep bob = new Sheep(new Vector3((float)(140*Math.random()+50),(float)(200*Math.random()+250),0), world);
+            Sheep bob = new Sheep(new Vector3((float)((viewportWidth-80)*Math.random()+80),(float)(200*Math.random()+250),0), world);
             entities.add(bob);
             stage.addActor(bob);
             //throw him in the herd as well
@@ -155,7 +155,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         //check if u at the top and need to cycle back around
 
-        if((scrollingCamera.position.y-scrollingCamera.viewportHeight/2) > 20) {
+        if((scrollingCamera.position.y-scrollingCamera.viewportHeight/2) > 2600) {
             scrollingCamera.position.y = scrollingCamera.viewportHeight/2;
             //updateMap();
         }
