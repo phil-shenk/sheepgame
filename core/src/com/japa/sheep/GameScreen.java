@@ -10,29 +10,40 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
+import java.util.ArrayList;
 
 public class GameScreen implements Screen, InputProcessor {
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private Rectangle rect;
-    private ExtendViewport viewport;
+    private FitViewport viewport;
 
     private Stage stage;
 
+    private ArrayList<Entity> entities;
+
     public GameScreen() {
-        //stage testing
-        stage = new Stage(new ScreenViewport());
-        SheepDog doggo = new SheepDog(new Position(100,100),12);
-        stage.addActor(doggo);
 
 
         camera = new OrthographicCamera();
         camera.setToOrtho(true, 800, 400);
-        viewport = new ExtendViewport(800, 400, camera);
+        viewport = new FitViewport(800, 400, camera);
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
+
+        //stage stuff
+        stage = new Stage(viewport);
+        //make doggo and add to the list of entities
+        entities = new ArrayList<Entity>();
+        SheepDog doggo = new SheepDog(new Position(100,100),12);
+        entities.add(doggo);
+        //put the doggo on the stage to perform his wonderful acts
+        stage.addActor(doggo);
+
         rect = new Rectangle();
         rect.x = 20;
         rect.y = 20;
@@ -56,6 +67,8 @@ public class GameScreen implements Screen, InputProcessor {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.ellipse(rect.x, rect.y, 10, 10);
         shapeRenderer.end();
+
+
 
         //should make everything act
         stage.act();
@@ -114,6 +127,10 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        rect.x = screenX;
+        rect.y = screenY;
+
+        entities.get(0).setPosition(screenX, screenY);
         return false;
     }
 
@@ -121,8 +138,12 @@ public class GameScreen implements Screen, InputProcessor {
     public boolean mouseMoved(int screenX, int screenY) {
         rect.x = screenX;
         rect.y = screenY;
+
+        entities.get(0).setPosition(screenX, screenY);
         return false;
     }
+
+
 
     @Override
     public boolean scrolled(int amount) {

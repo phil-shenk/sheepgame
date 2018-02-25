@@ -4,9 +4,14 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Sheep extends Animal{
     @Override
+    public void act(float delta) {
+
+    }
+
     public void tick() {
 
     }
+
     public void flee(){
 
     }
