@@ -28,7 +28,7 @@ public class Sheep extends Animal{
     }
 
     public void act(float delta) {
-        sheepCounter += delta;
+        sheepCounter = delta;
         if (!fleeing) {
             wander();
         } else if (fleeing) {
@@ -39,11 +39,22 @@ public class Sheep extends Animal{
         }
     }
     public void returnToHerd(){
+        if(getRelativePos().gety() < 200){
+            if(70 < getRelativePos().getx()){
+                translate((float)(sheepCounter*50), (float)(sheepCounter*30));
+            }
+            if(getRelativePos().getx() > 186){
+                translate((float)(sheepCounter*50), -(float)(sheepCounter*30));
+            }
+        }
+        else {
+            returning = false;
+            wander();
+        }
 
     }
     public void flee(){
         translate((float).7*sheepCounter,-100);
-        setPosition((float)(pos.getx()+.7*sheepCounter), (float)(pos.gety()-sheepCounter));
     }
     public void wander(){
         setPosition(((float)(pos.getx()+2.5*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.cos(6*sheepCounter*Math.random()))), ((float)(pos.gety()+3*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.sin(6*sheepCounter*Math.random()))));
