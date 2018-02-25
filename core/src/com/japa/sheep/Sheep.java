@@ -31,6 +31,7 @@ public class Sheep extends Animal{
     public void act(float delta) {
 
         sheepCounter += delta;
+        inHerd();
         if (!fleeing) {
             wander();
         } else if (fleeing) {
@@ -92,5 +93,17 @@ public class Sheep extends Animal{
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
         //batch.draw(region, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
         batch.draw(texture, pos.x, pos.y);
+    }
+    public boolean inHerd(){
+        if(!returning){
+            if( 90 < getRelativePos().x  || getRelativePos().x < 166){
+                fleeing = true;
+            }
+            else if ( getRelativePos().y < 60){
+                fleeing = true;
+            }
+        }
+
+        return fleeing;
     }
 }
