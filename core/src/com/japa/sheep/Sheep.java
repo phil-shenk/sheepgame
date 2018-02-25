@@ -9,6 +9,8 @@ public class Sheep extends Animal{
 
     static Texture texture = new Texture("sheep.png");
 
+    float sheepCounter;
+
     public Sheep(Position pos){
         this.pos = pos;
     }
@@ -24,13 +26,14 @@ public class Sheep extends Animal{
 
     public void act(float delta) {
         System.out.println("Bahahaha!");
-        //uyguyv
+        sheepCounter+=3*delta;
+        wander();
     }
     public void flee(){
 
     }
     public void wander(){
-
+        setPosition(((float)(pos.getx()+Math.cos(sheepCounter))), ((float)(pos.gety()+1.5*Math.sin(2*sheepCounter))));
     }
     public void die(){
 
