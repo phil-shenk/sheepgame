@@ -179,6 +179,7 @@ public class GameScreen implements Screen, InputProcessor {
         stage.draw();
 
         batch.begin();
+        font.draw(batch, "You've herded your sheep " + (int)distanceTravelled+ " meters", 10, viewportHeight*(.67f));
         font.draw(batch, "You've collected "+coinCount+" coins", 10, viewportHeight*(.77f));
         font.draw(batch, "You have herded  "+sheepCount+" sheep", 10, viewportHeight*(.72f));
         batch.end();
