@@ -40,6 +40,7 @@ public class GameScreen implements Screen, InputProcessor {
     private TiledMapImageLayer imageLayer;
     private TiledMapTileLayer tileLayer;
     private TiledMap map;
+    String msg = "";
     BitmapFont font;
 
 
@@ -95,7 +96,7 @@ public class GameScreen implements Screen, InputProcessor {
         //put the doggo on the stage to perform his wonderful acts
         stage.addActor(doggo);
         //creates a sheeps
-        for (int sheepcount=0; sheepcount<123; sheepcount++){
+        for (int sheepcount=0; sheepcount<25; sheepcount++){
             Sheep bob = new Sheep(new Vector3((float)((viewportWidth-(.2*viewportWidth))*Math.random()+(.08*viewportWidth)),(float)((.4*viewportHeight)*Math.random()+(.5*viewportHeight)),0), world);
             entities.add(bob);
             stage.addActor(bob);
@@ -159,10 +160,8 @@ public class GameScreen implements Screen, InputProcessor {
         //camera.translate(0,dy);
         //doggo.translate(0,dy);
 
-        for(Animal a : herd){
-           if(a.killMeNow){
-
-           }
+        if(entities.size() <11){
+            msg = "YOU LOST, your \nherd has dwindled too far";
         }
 
         //check if u at the top and need to cycle back around
@@ -182,6 +181,7 @@ public class GameScreen implements Screen, InputProcessor {
         font.draw(batch, "You've herded your sheep " + (int)distanceTravelled+ " meters", 10, viewportHeight*(.67f));
         font.draw(batch, "You've collected "+coinCount+" coins", 10, viewportHeight*(.77f));
         font.draw(batch, "You have herded  "+sheepCount+" sheep", 10, viewportHeight*(.72f));
+        font.draw(batch, msg, viewportHeight/2, 0);
         batch.end();
 
 
