@@ -3,15 +3,25 @@ package com.japa.sheep;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Sheep extends Animal{
-    @Override
-    public void act(float delta) {
 
+    public Sheep(Position pos){
+        this.pos = pos;
+        skin = new Texture("sheep.png");
     }
 
+    public Sheep(float newx, float newy){
+        this.pos = new Position(newx,newy);
+        skin = new Texture("sheep.png");
+    }
+
+    @Override
     public void tick() {
 
     }
 
+    public void act(float delta) {
+        System.out.println("Bahahaha!");
+    }
     public void flee(){
 
     }
