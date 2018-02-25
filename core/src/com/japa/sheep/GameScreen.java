@@ -64,7 +64,7 @@ public class GameScreen implements Screen, InputProcessor {
         //make doggo and add to the list of entities
         entities = new ArrayList<Entity>();
         herd = new ArrayList<Animal>();
-        doggo = new SheepDog(new Position(100,100),12);
+        doggo = new SheepDog(new Position(100,20),12);
         entities.add(doggo);
         //put the doggo on the stage to perform his wonderful acts
         stage.addActor(doggo);
@@ -95,13 +95,15 @@ public class GameScreen implements Screen, InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
+
+
+        mapRenderer.setView(camera);
+        mapRenderer.render();
+
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.ellipse(rect.x, rect.y, 10, 10);
         shapeRenderer.end();
-
-        mapRenderer.setView(camera);
-        mapRenderer.render();
 
         float dy = 100f*delta;
         camera.translate(0,dy);
@@ -119,7 +121,8 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height, true);
+        camera.update();
+        viewport.update(width, height, false);
     }
 
     @Override
@@ -183,7 +186,6 @@ public class GameScreen implements Screen, InputProcessor {
         //camera.position.x = screenX;
         //camera.position.y = screenY;
         //camera.update();
-        System.out.println(screenX+", "+screenY);
         doggo.setX(screenX);
 
         //entities.get(0).setPosition(screenX, screenY);
@@ -196,21 +198,25 @@ public class GameScreen implements Screen, InputProcessor {
         rect.y = screenY;
         //camera.position.x = screenX;
         //camera.position.y = screenY;
-        //Vector3 mousePos = new Vector3(screenX, screenY,0);
+        Vector3 mousePos = new Vector3(screenX, screenY,0);
         //Vector3 center = new Vector3(viewport.getScreenX()/2, viewport.getScreenY()/2,0);
-        //camera.unproject(mousePos);
+        System.out.println(mousePos.x+", "+ mousePos.y);
+        camera.unproject(mousePos);
+        System.out.println(mousePos.x+", "+ mousePos.y);
         //entities.get(0).setPosition(mousePos.x, mousePos.y);
         //camera.translate(mousePos.sub(center).scl(0.4f));
         ////camera.translate(screenX-(viewport.getScreenWidth()/2), screenY-(viewport.getScreenHeight()/2));
         ////camera.update();
         ////entities.get(0).setPosition(screenX, screenY);
+
+        doggo.setX(screenX);
+
         return false;
     }
 
     @Override
     public boolean scrolled(int amount) {
-
-        camera.zoom += (float)amount/10f;
+        //camera.zoom += (float)amount/10f;
         return false;
     }
 }
