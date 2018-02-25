@@ -33,7 +33,7 @@ public class GameScreen implements Screen, InputProcessor {
     private FitViewport viewport;
     static final int viewportWidth = 512;
     static final int viewportHeight= 512;
-    int distanceTravelled = 0;
+    float distanceTravelled = 0;
     //map stuff
     private OrthogonalTiledMapRenderer mapRenderer;
     private TiledMapImageLayer imageLayer;
@@ -137,7 +137,7 @@ public class GameScreen implements Screen, InputProcessor {
         mapRenderer.render();
         float dy = 50f*delta;
         scrollingCamera.translate(0,dy);
-        distanceTravelled += (int) dy;
+        distanceTravelled += dy;
         scrollingCamera.update();
 
         shapeRenderer.setProjectionMatrix(camera.combined);
