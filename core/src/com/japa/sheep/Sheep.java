@@ -104,7 +104,7 @@ public class Sheep extends Animal{
                 System.out.println(pos.x);
                 fleeing = true;
             }
-            else if ( pos.y < 200){
+            else if ( pos.y < 200 || pos.y>512){
                 fleeing = true;
             }
             else{
