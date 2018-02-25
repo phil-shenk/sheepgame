@@ -2,10 +2,10 @@ package com.japa.sheep;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
-
+import com.badlogic.gdx.math.Vector3;
 public class Coin extends Thing {
-
-    public Coin(){
+    static Texture texture = new Texture("coin.jpg");
+    public Coin(Vector3 pos){
 
     }
     @Override
