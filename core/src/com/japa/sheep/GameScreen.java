@@ -87,7 +87,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         //creates a sheep
         for (int sheepcount=0; sheepcount<26; sheepcount++){
-            Sheep bob = new Sheep(new Vector3((float)(100+50*Math.sin(sheepcount)),(float)(300-75*Math.cos(sheepcount)),0));
+            Sheep bob = new Sheep(new Vector3((float)(140*Math.random()+50),(float)(200*Math.random()+250),0));
             entities.add(bob);
             stage.addActor(bob);
             //throw him in the herd as well
