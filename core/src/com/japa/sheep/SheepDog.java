@@ -29,7 +29,7 @@ public class SheepDog extends Animal {
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
         //batch.draw(region, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-        batch.draw(texture, pos.x, pos.y);
+        batch.draw(texture, pos.x - 32, pos.y);
     }
 
     /**

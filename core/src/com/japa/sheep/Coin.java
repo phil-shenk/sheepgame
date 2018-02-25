@@ -13,6 +13,11 @@ public class Coin extends Thing {
 
     }
 
+    public void act(){
+        /**
+         * if collides w/ dog,
+         */
+    }
     @Override
     public Texture getSkin() {
         return null;
