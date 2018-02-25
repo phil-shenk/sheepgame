@@ -14,6 +14,7 @@ public class SheepGame extends Game {
 
 	@Override
 	public void create () {
+		System.out.println("SHEEPGAME CREATING");
 		batch = new SpriteBatch();
 		img = new Texture("sheep.png");
 		setScreen(new GameScreen());

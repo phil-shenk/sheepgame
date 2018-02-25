@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class GameScreen implements Screen, InputProcessor {
     private OrthographicCamera camera;
@@ -17,7 +19,15 @@ public class GameScreen implements Screen, InputProcessor {
     private Rectangle rect;
     private ExtendViewport viewport;
 
+    private Stage stage;
+
     public GameScreen() {
+        //stage testing
+        stage = new Stage(new ScreenViewport());
+        SheepDog doggo = new SheepDog(new Position(100,100),12);
+        stage.addActor(doggo);
+
+
         camera = new OrthographicCamera();
         camera.setToOrtho(true, 800, 400);
         viewport = new ExtendViewport(800, 400, camera);
@@ -47,6 +57,9 @@ public class GameScreen implements Screen, InputProcessor {
         shapeRenderer.ellipse(rect.x, rect.y, 10, 10);
         shapeRenderer.end();
 
+        //should make everything act
+        stage.act();
+        stage.draw();
     }
 
     @Override

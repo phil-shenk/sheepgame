@@ -26,7 +26,7 @@ public class Wolf extends Animal {
         return null;
     }
 
-    @Override
+    //@Override
     public void setPosition() {
 
     }

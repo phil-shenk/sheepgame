@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		config.title = "SheepGame";
 		config.width = 800;
 		config.height = 400;
+		System.out.println("GAAAH");
 		new LwjglApplication(new SheepGame(), config);
 	}
 }
