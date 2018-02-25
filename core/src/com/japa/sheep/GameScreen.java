@@ -139,7 +139,7 @@ public class GameScreen implements Screen, InputProcessor {
         scrollingCamera.translate(0,dy);
         distanceTravelled += dy;
         scrollingCamera.update();
-
+        System.out.println(distanceTravelled);
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.ellipse(rect.x, rect.y, 10, 10);
