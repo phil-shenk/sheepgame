@@ -1,17 +1,17 @@
 package com.japa.sheep;
 
-public class Position {
+public class Positiona {
     private float x;
     private float y;
 
     //Full Constructor method
-    public Position(float x, float y)
+    public Positiona(float x, float y)
     {
         setPosition(x, y);
     }
 
     //Copy Constructor method
-    public Position(Position other)
+    public Positiona(Positiona other)
     {
         this.x = other.x;
         this.y = other.y; //test
@@ -30,7 +30,7 @@ public class Position {
     }
 
     //Get y method
-    public Position getPosition()
+    public Positiona getPosition()
     {
         return this;
     }
@@ -41,8 +41,8 @@ public class Position {
         this.x = newx;
     }
 
-    public Position subtract(Position pos){
-        return new Position(x-pos.x, y-pos.y);
+    public Positiona subtract(Positiona pos){
+        return new Positiona(x-pos.x, y-pos.y);
     }
 
     //move

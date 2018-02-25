@@ -4,13 +4,14 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector3;
 
 public class SheepDog extends Animal {
 
     static Texture texture = new Texture("sheepdog.png");
     int dogginess;
 
-    public SheepDog(Position pos, int dogginess, Camera cam){
+    public SheepDog(Vector3 pos, int dogginess, Camera cam){
         super(cam);
         //temp:
         this.pos = pos;
@@ -28,7 +29,7 @@ public class SheepDog extends Animal {
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
         //batch.draw(region, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-        batch.draw(texture, pos.getx(), pos.gety());
+        batch.draw(texture, pos.x, pos.y);
     }
 
     /**
@@ -39,7 +40,7 @@ public class SheepDog extends Animal {
     }
 
     @Override
-    public Position getPosition() {
+    public Vector3 getPosition() {
         return null;
     }
 

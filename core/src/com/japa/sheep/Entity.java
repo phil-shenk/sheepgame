@@ -1,12 +1,14 @@
 package com.japa.sheep;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.sun.corba.se.spi.orbutil.proxy.CompositeInvocationHandler;
 
 public abstract class Entity extends Actor{
-    Position pos;
-    Position relativePos;
+    Vector3 pos;
+    Vector3 relativePos;
     Texture skin;
     Camera cam;
 
@@ -18,32 +20,33 @@ public abstract class Entity extends Actor{
         this.cam = cam;
     }
 
-    public Position getPosition()
+    public Vector3 getPosition()
     {
         return pos;
     }
 
-    public Position getRelativePos(){
-        return pos.subtract(new Position(cam.position.x, cam.position.y));
+    public Vector3 getRelativePos(){
+        return pos.sub(cam.position);
     }
-    public Position getRelativePos(Position refPos){
-        return pos.subtract(refPos);
+    public Vector3 getRelativePos(Vector3 refPos){
+        return pos.sub(refPos);
     }
 
     public void setPosition(float newx, float newy)
     {
-        pos.setPosition(newx, newy);
+        pos.x = newx;
+        pos.y = newy;
     }
 
     public void setX(float x){
-        pos.setx(x);
+        pos.x = x;
     }
     public void setY(float y){
-        pos.sety(y);
+        pos.y = y;
     }
 
     public void translate(float dx, float dy){
-        pos.translate(dx,dy);
+        pos.add(dx,dy,0);
     }
 
     public abstract Texture getSkin();

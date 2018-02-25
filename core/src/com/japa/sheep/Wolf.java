@@ -2,6 +2,7 @@ package com.japa.sheep;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector3;
 
 public class Wolf extends Animal {
 
@@ -19,7 +20,7 @@ public class Wolf extends Animal {
                 chase();
             }
 
-            if (pos.getx()<=5){
+            if (pos.x<=5){
                 //remove();
             }
         }
@@ -51,7 +52,7 @@ public class Wolf extends Animal {
      * from sheepdog
      */
     public void flee(){
-        pos.setx(pos.getx()-5);
+        pos.x -= 5;
     }
 
     public void sit(){
@@ -65,13 +66,14 @@ public class Wolf extends Animal {
     }*/
 
     @Override
-    public Position getPosition() {
-        return pos.getPosition();
+    public Vector3 getPosition() {
+        return pos;
     }
 
     //@Override
     public void setPosition(float newx, float newy) {
-        pos.setPosition(newx, newy);
+        pos.x = newx;
+        pos.y = newy;
     }
 
     @Override

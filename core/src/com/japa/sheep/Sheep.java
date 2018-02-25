@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector3;
 
 
 public class Sheep extends Animal{
@@ -12,14 +13,14 @@ public class Sheep extends Animal{
     private boolean fleeing;
     float sheepCounter;
     private boolean returning;
-    public Sheep(Position pos, Camera cam){
+    public Sheep(Vector3 pos, Camera cam){
         super(cam);
         this.pos = pos;
     }
 
     public Sheep(float newx, float newy, Camera cam){
         super(cam);
-        this.pos = new Position(newx,newy);
+        this.pos = new Vector3(newx,newy,0);
     }
 
     @Override
@@ -39,11 +40,11 @@ public class Sheep extends Animal{
         }
     }
     public void returnToHerd(){
-        if(getRelativePos().gety() < 200){
-            if(70 < getRelativePos().getx()){
+        if(getRelativePos().y < 200){
+            if(70 < getRelativePos().x){
                 translate((float)(sheepCounter*50), (float)(sheepCounter*30));
             }
-            if(getRelativePos().getx() > 186){
+            if(getRelativePos().x > 186){
                 translate((float)(sheepCounter*50), -(float)(sheepCounter*30));
             }
         }
@@ -57,13 +58,13 @@ public class Sheep extends Animal{
         translate((float).7*sheepCounter,-100);
     }
     public void wander(){
-        setPosition(((float)(pos.getx()+2.5*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.cos(6*sheepCounter*Math.random()))), ((float)(pos.gety()+3*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.sin(6*sheepCounter*Math.random()))));
+        setPosition(((float)(pos.x+2.5*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.cos(6*sheepCounter*Math.random()))), ((float)(pos.y+3*(Math.sin(2.1*6*sheepCounter*Math.random())+.25*Math.sin(36*sheepCounter*Math.random()))*Math.sin(6*sheepCounter*Math.random()))));
     }
     public void die(){
 
     }
     @Override
-    public Position getPosition() {
+    public Vector3 getPosition() {
         return null;
     }
 
@@ -87,6 +88,6 @@ public class Sheep extends Animal{
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
         //batch.draw(region, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-        batch.draw(texture, pos.getx(), pos.gety());
+        batch.draw(texture, pos.x, pos.x);
     }
 }

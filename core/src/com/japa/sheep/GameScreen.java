@@ -71,13 +71,13 @@ public class GameScreen implements Screen, InputProcessor {
         //make doggo and add to the list of entities
         entities = new ArrayList<Entity>();
         herd = new ArrayList<Animal>();
-        doggo = new SheepDog(new Position(100,20),12, camera);
+        doggo = new SheepDog(new Vector3(100,20,0),12, camera);
         entities.add(doggo);
         //put the doggo on the stage to perform his wonderful acts
         stage.addActor(doggo);
 
         //creates a sheep
-        Sheep bob = new Sheep(new Position(150,150), camera);
+        Sheep bob = new Sheep(new Vector3(150,150,0), camera);
         entities.add(bob);
         stage.addActor(bob);
         //throw him in the herd as well
