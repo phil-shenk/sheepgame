@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -19,6 +20,7 @@ public class Sheep extends Animal{
     float sheepCounter;
     private boolean returning = false;
     private boolean wandering = true;
+    Vector3 target = null;
     public Sheep(Vector3 pos, World world){
         super(pos, world);
     }
@@ -35,7 +37,9 @@ public class Sheep extends Animal{
     public void collidedWithDoggo(){
         System.out.print("RETURNING IS NOW TRUE");
         returning = true;
-        System.out.println(returning);
+
+        target = new Vector3(((float)Math.random()*viewportWidth*0.4f+viewportWidth*0.3f), 0.75f*viewportHeight, 0);
+        System.out.println("set target to "+target);
         fleeing = false;
         wandering = false;
     }
@@ -61,17 +65,18 @@ public class Sheep extends Animal{
 
     }
     public void returnToHerd(float delta){
-        float rand = (float)Math.random();
-        System.out.println("NEW SHEEP:\nx target="+(rand*viewportWidth*0.8f-viewportWidth/2));
-        Vector3 target = new Vector3((rand*viewportWidth*0.8f+viewportWidth/2), 0.75f*viewportHeight, 0);
+
         //Vector3 target = new Vector3(0,0.75f*viewportHeight,0);
-        Vector3 dir = target.sub(pos);
+        System.out.println("Targ:"+target);
+        Vector3 dir = new Vector3(target).sub(pos);
+        System.out.println("Targpostsub:"+target);
 
         if(dir.len()<10){
             returning = false;
             wandering = true;
             fleeing = false;
         }
+
         System.out.println("DIR:"+dir);
         dir.setLength(1f);
         System.out.println("UNITDIR:"+dir);
@@ -79,38 +84,6 @@ public class Sheep extends Animal{
         System.out.println("PRESPOS:"+pos);
         pos.add(dir);
         System.out.println("POStPOS:"+pos);
-
-
-
-        /*
-        if(pos.y < 200){
-            System.out.println("a");
-            if(70 > pos.x){
-                System.out.println("b");
-                translate((float)(delta*80), (float)(delta*80));
-            }
-            if(pos.x > 186){
-                pos.
-                System.out.println("c");
-                translate((float)(delta*80), -(float)(delta*80));
-            }
-        }
-        else if(70 > pos.x){
-            System.out.println("asdzzzzzzzzzzzzzzzzzzzzzzdojxvcvking");
-            translate((float)(delta*60), (float)(delta*120*Math.random()));
-            translate((float)(delta*60), (float)(delta*120*Math.random()));
-        }
-        else if(pos.x > 186){
-            System.out.println("sadhs aefhndojxvcvking");
-            translate(-(float)(delta*60), (float)(delta*120*Math.random()));
-            translate(-(float)(delta*60), -(float)(delta*120*Math.random()));
-        }
-        else {
-            System.out.println("nipe");
-            returning = false;
-            wander(delta);
-        }
-        */
 
     }
     public void flee(float delta){
@@ -164,7 +137,7 @@ public class Sheep extends Animal{
             else{
                 //System.out.println("not returning, in the herd area");
                 double x = Math.random();
-                if( x < 0.01009){
+                if( x < 0.00009){
                     fleeing = true;
                 }
             }
