@@ -112,8 +112,9 @@ public class GameScreen implements Screen, InputProcessor {
         float dy = 100f*delta;
         camera.translate(0,dy);
         doggo.translate(0,dy);
+
         for(Animal a : herd){
-            a.translate(0,dy);
+           a.translate(0,dy);
         }
 
         //should make everything act

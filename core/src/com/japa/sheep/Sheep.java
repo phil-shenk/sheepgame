@@ -29,15 +29,18 @@ public class Sheep extends Animal{
     }
 
     public void act(float delta) {
+
         sheepCounter += delta;
         if (!fleeing) {
             wander();
         } else if (fleeing) {
+
             flee(delta);
         }
         else if(returning){
             returnToHerd(delta);
         }
+
     }
     public void returnToHerd(float delta){
         if(getRelativePos().y < 200){
@@ -88,6 +91,6 @@ public class Sheep extends Animal{
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
         //batch.draw(region, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-        batch.draw(texture, pos.x, pos.x);
+        batch.draw(texture, pos.x, pos.y);
     }
 }

@@ -46,7 +46,9 @@ public abstract class Entity extends Actor{
     }
 
     public void translate(float dx, float dy){
+        System.out.println(pos.x+"old");
         pos.add(dx,dy,0);
+        System.out.println(pos.x);
     }
 
     public abstract Texture getSkin();
