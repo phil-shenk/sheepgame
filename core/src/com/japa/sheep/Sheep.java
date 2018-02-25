@@ -31,8 +31,8 @@ public class Sheep extends Animal{
         sheepCounter += delta;
         inHerd();
         if (!fleeing) {
-            wander(delta);
-            //returnToHerd(delta);
+            //wander(delta);
+            returnToHerd(delta);
         } else if (fleeing) {
             flee(delta);
         }
@@ -44,12 +44,20 @@ public class Sheep extends Animal{
     public void returnToHerd(float delta){
         System.out.println("bacc to herd");
         if(pos.y < 200){
-            if(70 < pos.x){
-                translate((float)(sheepCounter*50), (float)(sheepCounter*30));
+            if(70 > pos.x){
+                translate((float)(delta*80), (float)(delta*80));
             }
             if(pos.x > 186){
-                translate((float)(sheepCounter*50), -(float)(sheepCounter*30));
+                translate((float)(delta*80), -(float)(delta*80));
             }
+        }
+        else if(70 > pos.x){
+            translate((float)(delta*60), (float)(delta*120*Math.random()));
+            translate((float)(delta*60), (float)(delta*120*Math.random()));
+        }
+        else if(pos.x > 186){
+            translate(-(float)(delta*60), (float)(delta*120*Math.random()));
+            translate(-(float)(delta*60), -(float)(delta*120*Math.random()));
         }
         else {
             returning = false;
@@ -100,7 +108,7 @@ public class Sheep extends Animal{
     }
     public boolean inHerd(){
         if(!returning){
-            if( 50  > pos.x  || pos.x > 206){
+            if( 30  > pos.x  || pos.x > 226){
                 System.out.println(pos.x);
                 fleeing = true;
             }
@@ -109,7 +117,7 @@ public class Sheep extends Animal{
             }
             else{
                 double x = Math.random();
-                if( x < 0.0009){
+                if( x < 0.00009){
                     fleeing = true;
                 }
                 return fleeing;

@@ -13,10 +13,13 @@ public class Coin extends Thing {
 
     }
 
-    public void act(){
+    public void act(float delta){
         /**
          * if collides w/ dog,
          */
+        //else{
+            translate(0, -delta);
+        //}
     }
     @Override
     public Texture getSkin() {
