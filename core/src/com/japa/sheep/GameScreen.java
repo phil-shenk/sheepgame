@@ -114,7 +114,12 @@ public class GameScreen implements Screen, InputProcessor {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        double x = Math.random();
+        if(x < 0.0019){
+            Coin coin = new Coin(new Vector3((float)(196*Math.random() + 30), 500, 0));
+            entities.add(coin);
+            stage.addActor(coin);
+        }
         /*
         this.renderer.setView(scrollingCamera);
         this.renderer.render(); // Render tiles

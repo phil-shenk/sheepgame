@@ -20,7 +20,7 @@ public class Coin extends Thing {
          * if collides w/ dog,
          */
         //else{
-            translate(0, -70f*delta);
+            translate(0, -100f*delta);
         //}
     }
     @Override
